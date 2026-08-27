@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Trupty ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; background:#080b12; color:#e6edf3;
+  font-family:"Courier New",monospace; display:flex; justify-content:center;
+  align-items:center; overflow:hidden;
+}
+.container{width:min(90%,700px);text-align:center}
+#terminal{
+  background:#0d1117;border:1px solid #30363d;border-radius:14px;padding:25px;
+  text-align:left;box-shadow:0 0 40px rgba(255,80,130,.15)
+}
+.bar{display:flex;gap:7px;margin-bottom:20px}
+.dot{width:12px;height:12px;border-radius:50%;background:#555}
+.terminal-text{line-height:1.8;min-height:300px}
+.pink{color:#ff7eb6}.green{color:#7ee787}.yellow{color:#f2cc60}
+button{
+  margin-top:25px;padding:14px 25px;border:none;border-radius:10px;
+  background:#ff4f91;color:white;font-size:16px;font-family:inherit;cursor:pointer;
+  transition:.3s
+}
+button:hover{transform:scale(1.08);box-shadow:0 0 25px rgba(255,79,145,.5)}
+#proposal{display:none;animation:fadeIn 1.5s ease}
+.heart{font-size:70px;animation:heartbeat 1.2s infinite}
+h1{font-size:clamp(32px,8vw,60px);margin:10px 0}
+.message{font-family:Arial,sans-serif;font-size:19px;line-height:1.8;color:#ddd}
+.question{font-size:clamp(24px,5vw,38px);margin-top:35px;color:#ff7eb6}
+#answer{display:none;margin-top:30px;font-family:Arial,sans-serif;font-size:22px;line-height:1.6}
+@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div id="terminal">
+    <div class="bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    <div id="terminalText" class="terminal-text"></div>
+    <button id="continueBtn" onclick="startProposal()" style="display:none">Continue ❤️</button>
+  </div>
+
+  <div id="proposal">
+    <div class="heart">❤️</div>
+    <h1>Hey Trupty...</h1>
+    <div class="message">
+      <p>As a software engineer, I've spent a lot of time thinking about logic, algorithms and solving problems.</p>
+      <p>But then I saw you, and somehow my heart already knew the answer.</p>
+      <p>Some things aren't meant to be calculated. They're meant to be felt.</p>
+      <p>From that first moment, you became someone incredibly special to me.</p>
+      <p>And now I want to build the rest of my life with you.</p>
+    </div>
+    <div class="question">Trupty,<br><br>Will you marry me? 💍</div>
+    <button onclick="sayYes()">YES ❤️</button>
+    <div id="answer">
+      <strong>BUILD SUCCESSFUL! 🎉</strong><br><br>
+      Relationship status: <span class="pink">FOREVER ❤️</span><br><br>
+      Developer: Adithya<br>
+      First sight: ❤️<br>
+      Status: Happily Ever After 🚀
+    </div>
+  </div>
+</div>
+
+<script>
+const lines=[
+"$ ./start-love.exe","",
+"Initializing...",
+"Loading memories...",
+"Finding something special...","",
+"✓ First sight detected 👀",
+"✓ Heart.exe started ❤️",
+"✓ Love initialized",
+"✓ No bugs found",
+"✓ Forever mode activated 💍","",
+"Running future.simulation...","",
+"WARNING ⚠️",
+"Adithya has a very important question.","",
+"Target identified: Trupty ❤️","",
+"System ready."
+];
+
+const terminal=document.getElementById("terminalText");
+const button=document.getElementById("continueBtn");
+let lineIndex=0;
+
+function typeLine(){
+  if(lineIndex>=lines.length){button.style.display="inline-block";return}
+  const line=lines[lineIndex], div=document.createElement("div");
+  if(line.includes("✓")) div.className="green";
+  else if(line.includes("WARNING")) div.className="yellow";
+  else if(line.includes("Trupty")) div.className="pink";
+  terminal.appendChild(div);
+  let charIndex=0;
+  const interval=setInterval(()=>{
+    div.textContent+=line[charIndex++];
+    if(charIndex>=line.length){
+      clearInterval(interval);lineIndex++;setTimeout(typeLine,250);
+    }
+  },30);
+}
+
+function startProposal(){
+  document.getElementById("terminal").style.display="none";
+  document.getElementById("proposal").style.display="block";
+}
+
+function sayYes(){
+  document.querySelector(".question").style.display="none";
+  document.querySelector("#proposal button").style.display="none";
+  document.getElementById("answer").style.display="block";
+  document.body.style.overflow="auto";
+
+  for(let i=0;i<30;i++){
+    const heart=document.createElement("div");
+    heart.innerHTML="❤️";
+    heart.style.position="fixed";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.top="100vh";
+    heart.style.fontSize=(15+Math.random()*25)+"px";
+    heart.style.transition="transform 3s ease, opacity 3s ease";
+    heart.style.zIndex="999";
+    document.body.appendChild(heart);
+    setTimeout(()=>{
+      heart.style.transform="translateY(-110vh) rotate("+Math.random()*360+"deg)";
+      heart.style.opacity="0";
+    },50);
+    setTimeout(()=>heart.remove(),3200);
+  }
+}
+typeLine();
+</script>
+</body>
+</html>
